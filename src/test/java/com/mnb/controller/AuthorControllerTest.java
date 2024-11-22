@@ -42,7 +42,7 @@ public class AuthorControllerTest {
     @InjectMocks
     private AuthorController authorController;
 
-//    private Author author;
+   private Author author;
 
     @BeforeEach
     public void setUp() {

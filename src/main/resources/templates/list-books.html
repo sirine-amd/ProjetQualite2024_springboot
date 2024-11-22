@@ -15,6 +15,9 @@
 <div class="container">
     <h3>BOOKS LIST</h3>
     <hr>
+	   <!-- Display the number of books -->
+	   <p><strong>Total Books: </strong><span th:text="${#lists.size(books)}"></span></p>
+
     <a th:href="@{/books/showFormForAdd}" class="btn btn-primary btn-sm mb-3">
         Add Book
     </a>
