@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -33,25 +34,24 @@ public class AuthorControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Mock
+    @MockBean
     private AuthorService authorService;
 
-    @Mock
+    @MockBean
     private BookService bookService;
 
     @InjectMocks
     private AuthorController authorController;
 
-//    private Author author;
+   private Author author;
 
     @BeforeEach
     public void setUp() {
-    	Author author = new Author();
+    	author = new Author();
         author.setAuthorName("John");
         author.setId(1);
         author.setDescription("Doe");
-        author= authorService.save(author);
-        System.out.println(author);
+        when(authorService.save(author)).thenReturn(author);
     }
 
     @Test

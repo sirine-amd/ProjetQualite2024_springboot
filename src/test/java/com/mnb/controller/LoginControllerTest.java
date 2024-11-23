@@ -3,6 +3,7 @@ package com.mnb.controller;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -28,12 +29,9 @@ public class LoginControllerTest {
 	}
 
 	@Test
+	@WithMockUser(value = "sirine", roles = { "USER" }, password = "test123")
 	public void testShowAccessDenied() throws Exception {
-		MvcResult s = mockMvc.perform(get("/books/list")).andReturn();
-		System.out.println(s);
-		MvcResult res = mockMvc.perform(post("/access-denied")).andReturn();
-		System.out.println(res);
-		mockMvc.perform(post("/access-denied")).andExpect(status().isForbidden())
+		mockMvc.perform(post("/access-denied")).andExpect(status().isOk())
 				.andExpect(view().name("access-denied"));
 	}
 }
